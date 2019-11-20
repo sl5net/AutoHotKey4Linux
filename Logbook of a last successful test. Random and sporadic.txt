@@ -1,0 +1,28 @@
+here your could see a snapshot of working test:
+
+How to check version of installed wine:
+
+$ wine --version
+wine-4.18
+
+autokey-gtk
+0.95.7
+
+$ cat /etc/*-release
+Manjaro Linux
+DISTRIB_ID=ManjaroLinux
+DISTRIB_RELEASE=18.1.3
+DISTRIB_CODENAME=Juhraya
+DISTRIB_DESCRIPTION="Manjaro Linux"
+Manjaro Linux
+NAME="Manjaro Linux"
+ID=manjaro
+ID_LIKE=arch
+PRETTY_NAME="Manjaro Linux"
+ANSI_COLOR="1;32"
+HOME_URL="https://www.manjaro.org/"
+SUPPORT_URL="https://www.manjaro.org/"
+BUG_REPORT_URL="https://bugs.manjaro.org/"
+LOGO=manjarolinux
+
+
