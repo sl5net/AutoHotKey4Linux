@@ -16,6 +16,7 @@ SetBatchLines, -1
 tOld := ""
 cOld := ""
 keyOld := ""
+; testtesttesttes ttesttesttestttesttesttest <st <st <st <st <st <AutoKey:active_title=*/home/seeh/skripts/ahk/read_key_title_class_from_cllipboard_v3.ahk - Mousepad,active_class=mousepad.Mousepad,release_key='v'>
 ; Key.esc
 ; Expected Examples of Version 1:
 ; <AutoKey:active_title=*/home/seeh/skripts/ahk/read_key_title_class_from_cllipboard.ahk - Mousepad,active_class=mousepad.Mousepad,key=Key.up>
@@ -26,11 +27,17 @@ cbBackup := clipboard
 while(1)
 {
 	cb = %clipboard%
-	; press_key ; release_key
+	; press_key ; release_key sdfasdf <AutoKey:active_title=*/home/seeh/skripts/ahk/read_key_title_class_from_cllipboard_v3.ahk - Mousepad,active_class=mousepad.Mousepad,release_key=','>
 	; (?<pressORrelease>(press|release))_key
-	FoundPos := RegExMatch(cb, "O)<AutoKey:active_title=(?<active_title>[^,>]*),active_class=(?<active_class>[^,>]*),(?<pressORrelease>(press|release))_key=(?<key>[^,>]*)>", SubPat)  ; The starting "O)" turns SubPat into an object.
+	; The starting "O)" turns SubPat into an object.
+	regEx := "O)<AutoKey:active_title=(?<active_title>[^,>]*),active_class=(?<active_class>[^,>]*),(?<pressORrelease>(press|release))_key=(?<key>[^,>]*)>"
+	FoundPos := RegExMatch(cb, regEx, SubPat)  ; The starting "O)" turns SubPat into an object.
 	if(FoundPos){
 		clipboard := cbBackup
+		while(A_Index<100 && RegExMatch(clipboard, regEx)){
+			clipboard := cbBackup
+			Sleep,9
+		}
 		if(keyOld <> SubPat["key"]){
 
 if(SubPat["key"] == "Key.esc")
@@ -41,13 +48,18 @@ keyOld := SubPat["key"]
 			cOld := SubPat["active_class"]
 			tip := "tit=" SubPat["active_title"] "`nclass=" SubPat["active_class"] "`npressORrelease=" SubPat["pressORrelease"]  "`nkey=" SubPat["key"] "`nBackup=" cbBackup, 350, 5
 			tooltip, % tip, 350, 5
-			msgbox,% tip
+;			msgbox,% tip
+while(A_Index<100 && RegExMatch(clipboard, regEx)){
+			clipboard := cbBackup
+			Sleep,9
+		}
+
 		}
 	}else{
 	   cbBackup := cb
 	}
 	;FoundPos:=0
-	Sleep,1500
+	Sleep,10 ; 70, 30, 10 works at my machine with 3% CPU
 }
 tooltip,
 
