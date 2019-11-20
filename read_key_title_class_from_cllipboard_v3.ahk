@@ -33,11 +33,13 @@ while(1)
 	regEx := "O)<AutoKey:active_title=(?<active_title>[^,>]*),active_class=(?<active_class>[^,>]*),(?<pressORrelease>(press|release))_key=(?<key>[^,>]*)>"
 	FoundPos := RegExMatch(cb, regEx, SubPat)  ; The starting "O)" turns SubPat into an object.
 	if(FoundPos){
+		if(cbBackup){
 		clipboard := cbBackup
 		while(A_Index<100 && RegExMatch(clipboard, regEx)){
 			clipboard := cbBackup
 			Sleep,9
 		}
+}
 		if(keyOld <> SubPat["key"]){
 
 if(SubPat["key"] == "Key.esc")
@@ -50,13 +52,16 @@ keyOld := SubPat["key"]
 			tooltip, % tip, 350, 5
 ;			msgbox,% tip
 while(A_Index<100 && RegExMatch(clipboard, regEx)){
+if(cbBackup){
 			clipboard := cbBackup
+}
 			Sleep,9
 		}
 
 		}
 	}else{
-	   cbBackup := cb
+	if(cb)
+	   cbBackup = %cb%
 	}
 	;FoundPos:=0
 	Sleep,10 ; 70, 30, 10 works at my machine with 3% CPU
