@@ -9,4 +9,13 @@ wine for Linux  and
 AutoHotKey and  
 AutoKey for Linux
 
+# Motivation:
+
+  - The (normal) AutoHotkey installation on Linux with Wine currently has 
+  difficulty interrogating the keyboard without this tool.
+  - The transfer of keystrokes to VirtualBox guests 
+  without to focus the guest can thus be made possible.
+
+
+
 
