@@ -19,6 +19,8 @@ i put them into
 
 /home/YourName/.config/autokey/data/AutoHotKey4Linux
 
+to start ahk files simply click them (need installed wine before).
+
 # github installation
 
 i simply installed all files to
@@ -34,3 +36,12 @@ read the filename and you should understand what they trying to do.
 
 for test something normally you use two files. 
 its all for comunication beetween these py files and the ahk files.
+
+# recommendations
+
+use a tools like copyQ. config it not to use  HTML (Items>HTML/RTF: off)
+
+So your clipboard is maybe more readable. i not sure of that.
+
+
+
