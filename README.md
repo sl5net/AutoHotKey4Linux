@@ -38,3 +38,6 @@ information where its coming from (window title, window class)
 			;....
 
 
+# example 191130-222333:
+
+this listens to CTRL+S and reloads: youtu.be / XZkbu4ik83c
