@@ -25,6 +25,7 @@ cbBackup := ""
 tOld := ""
 cOld := ""
 keyOld := ""
+pressORreleaseOld := ""
 keyHistory := ""
 keyHistoryOld := ""
 
@@ -45,8 +46,8 @@ regEx := "O)<AutoKey:active_title=(?<active_title>[^,>]*),active_class=(?<active
 FoundPos := RegExMatch(cb, regEx, SubPat)  ; The starting "O)" turns SubPat into an object.
 if(FoundPos){
 	tip := "tit=" SubPat["active_title"] "`nclass=" SubPat["active_class"] "`npressORrelease=" SubPat["pressORrelease"]  "`nkey=" SubPat["key"] "`nBackup=" cbBackup, 350, 5
-	tooltip, % tip, 350, 10
-	msgbox,,REGEX found :),% tip,1 ; works :)
+	;tooltip, % tip, 350, 10
+	;msgbox,,REGEX found :),% tip,1 ; works :)
 	tooltip,
 }else{
 	msgbox,,ERROR ,% regEx
@@ -78,17 +79,21 @@ if(!regEx)
 while(1){
 	cb := clipboard
 	if(!cb){ 
-		tooltip,% "empty cp. (line=" A_LineNumber ")`n" keyHistory
+		; tooltip,% "empty cp. (line=" A_LineNumber ")`n" keyHistory
 		sleep,40
 		continue
 	} ; test
 ;	msgbox,,% cb,% "key=" cb " line=" A_LineNumber,1 ; works :)     
 ;	tooltip,% "cb=" cb "`nclipboard=" clipboard " `n(line=" A_LineNumber ")`n" keyHistory, 350, 10
-	if(keyHistoryOld != keyHistory)
-		tooltip,% "(line=" A_LineNumber ")`n" keyHistory, 400, 150,5
+	; if(keyHistoryOld != keyHistory)
+	;	tooltip,% "(line=" A_LineNumber ")`n" keyHistory, 400, 150,5
 	; The starting "O)" turns SubPat into an object. 
 ; <AutoKey:active_title=*/home/seeh/skripts/ahk/read_key_title_class_from_cllipboard_v3.ahk - Mousepad,active_class=mousepad.Mousepad,press_key=Key.esc>
 ; okokokoko rrr
+
+; <AutoKey:active_title=Double Commander 0.9.6 beta build 9018; 2019/09/01,active_class=doublecmd.Double Commander,release_key=Key.enter>
+;      
+
 
 	FoundPos := RegExMatch(cb, regEx, SubPat)  ; The starting "O)" turns SubPat into an object.
 	if(FoundPos){
@@ -101,25 +106,53 @@ while(1){
 			if(RegExMatch(clipboard, regEx))
 			   clipboard := cbBackup2
 		}
-		;msgbox,,% A_LineNumber,% A_LineNumber,1 ; works :)aaaaaa
+		;msgbox,,% A_LineNumber,% A_LineNumber,1 ; works :)aaaaaa 
 		if(keyOld <> SubPat["key"]){
 
 			if(SubPat["key"] == "Key.esc")
 				ExitApp
+			tip := "tit=" SubPat["active_title"] "`nclass=" SubPat["active_class"] "`npressORrelease=" SubPat["pressORrelease"]  "`nkey=" SubPat["key"] "`nBackup=" cbBackup
+			if(pressORreleaseOld=="press" && keyOld == "Key.ctrl"){
+				tooltip,% ":-) " tip " `n(line=" A_LineNumber ")`n" keyHistory
+				if(SubPat["pressORrelease"]=="press" && SubPat["key"] == "'1'"){
+					msgbox,% ":-) " tip " `n(line=" A_LineNumber ")`n" keyHistory
+				}
+			} else{
+				tooltip,% tip " `n(line=" A_LineNumber ")`n" keyHistory 
+			}
+;            1       
 			keyOld := SubPat["key"]
+			pressORreleaseOld := SubPat["pressORrelease"]
 			keyHistoryOld := keyHistory
 			keyHistory .= keyOld
 			tOld := SubPat["active_title"]
 			cOld := SubPat["active_class"]
-			tip := "tit=" SubPat["active_title"] "`nclass=" SubPat["active_class"] "`npressORrelease=" SubPat["pressORrelease"]  "`nkey=" SubPat["key"] "`nBackup=" cbBackup, 350, 5
-			;msgbox,,% tip,% A_LineNumber,1 ; works :)
-			;tooltip, % tip, 350, 10
 ;			tooltip, % tip, 350, 10
-	tooltip,% " `n(line=" A_LineNumber ")`n" keyHistory
+;  
+;	tooltip,% " `n(line=" A_LineNumber ")`n" keyHistory
 			;msgbox,,% "",% tip,1 ; works :)
-			while(A_Index<100 && RegExMatch(clipboard, regEx)){
-				if(!cbBackup)
+			;msgbox,,% tip,% A_LineNumber,1 ; works :)
+
+			
+
+			if(SubPat["key"] == "Key.ctrl"){
+				;tooltip,% " `n(line=" A_LineNumber ")`n" keyHistory
+			} else{
+				;tooltip,% " `n(line=" A_LineNumber ")`n" keyHistory
+			}
+
+/*
+test  sdf sdfs sdf sdf sdf
+test   ssdf    ttets 				tooltip,% " `n(line=" A_LineNumber ")`n" keyHistory
+ssss   sdasd 
+      
+*/
+
+			while(A_Index<200 && RegExMatch(clipboard, regEx)){
+				if(!cbBackup){
+					msgbox,index: %A_Index%<100 break
 					break
+				}
 				clipboard := cbBackup
 				Sleep,15
 			}
