@@ -11,6 +11,7 @@ Key.esc key='k' key=Key.ctrl
 #NoEnv              ; Recommended for performance and compatibility with future AutoHotkey releases.
 #Warn
 #SingleInstance Force
+; #InstallKeybdHook
 SendMode Input      ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir, %A_ScriptDir%
 SetTitleMatchMode 2
@@ -29,16 +30,18 @@ pressORreleaseOld := ""
 keyHistory := ""
 keyHistoryOld := ""
 
-; some simple test:
-tip = Welcome to %A_ScriptName%
-tooltip, % tip, 350, 10
-sleep,100
-WinActivate , AutoKey  ; this probably not working into Linux
-sleep,100
-Send,`; %tip% ; this kind of sending is not working into Linux
-sleep,1000
-msgbox,,% tip,% clipboard,1 ; works :)
-
+if(False){
+	; some simple test:
+	tip = Welcome to %A_ScriptName%
+	tooltip, % tip, 350, 10
+	sleep,100
+	WinActivate , AutoKey  ; this probably not working into Linux
+	sleep,100
+	Send,`; %tip% ; this kind of sending is not working into Linux
+	sleep,1000
+	msgbox,,% tip,% clipboard,1 ; works :)
+}
+;   
 ; check regEx is working
 ; cb := "<AutoKey:active_title=*/read_key_title.ahk - Mousepad,active_class=mousepad.Mousepad,press_key=Key.ctrl>"
 cb := "<AutoKey:active_title=title,active_class=class,press_key=k>" ; most simple form
@@ -89,7 +92,7 @@ while(1){
 	;	tooltip,% "(line=" A_LineNumber ")`n" keyHistory, 400, 150,5
 	; The starting "O)" turns SubPat into an object. 
 ; <AutoKey:active_title=*/home/seeh/skripts/ahk/read_key_title_class_from_cllipboard_v3.ahk - Mousepad,active_class=mousepad.Mousepad,press_key=Key.esc>
-; okokokoko rrr
+; okokokoko 
 
 ; <AutoKey:active_title=Double Commander 0.9.6 beta build 9018; 2019/09/01,active_class=doublecmd.Double Commander,release_key=Key.enter>
 ;      
@@ -106,21 +109,32 @@ while(1){
 			if(RegExMatch(clipboard, regEx))
 			   clipboard := cbBackup2
 		}
-		;msgbox,,% A_LineNumber,% A_LineNumber,1 ; works :)aaaaaa 
+		;msgbox,,% A_LineNumber,% A_LineNumber,1 ; works :)aaaaaa                  
 		if(keyOld <> SubPat["key"]){
-
+;     cc release release            release release release    release
 			if(SubPat["key"] == "Key.esc")
 				ExitApp
-			tip := "tit=" SubPat["active_title"] "`nclass=" SubPat["active_class"] "`npressORrelease=" SubPat["pressORrelease"]  "`nkey=" SubPat["key"] "`nBackup=" cbBackup
-			if(pressORreleaseOld=="press" && keyOld == "Key.ctrl"){
+			tip := "tit=" SubPat["active_title"] "`nclass=" SubPat["active_class"] "`n`npressORrelease=" SubPat["pressORrelease"]  "`nkey=" SubPat["key"] "`n`nBackup=" cbBackup
+			; pressORreleaseOld=="press" && 
+			;         sssss
+			if(keyOld == "Key.ctrl"){
 				tooltip,% ":-) " tip " `n(line=" A_LineNumber ")`n" keyHistory
 				if(SubPat["pressORrelease"]=="press" && SubPat["key"] == "'1'"){
 					msgbox,% ":-) " tip " `n(line=" A_LineNumber ")`n" keyHistory
 				}
+				if(SubPat["pressORrelease"]=="release" && SubPat["key"] == "'s'"){
+					; Send,<AltDown>f<AltUp>   
+					msgbox,% ":-D lets reload it " tip " `n(line=" A_LineNumber ")`n" keyHistory
+					Reload 
+				}
+				if(SubPat["pressORrelease"]=="release" && SubPat["key"] == "'y'"){
+					; Send,<AltDown>f<AltUp>    
+					send,^s
+				}
 			} else{
 				tooltip,% tip " `n(line=" A_LineNumber ")`n" keyHistory 
 			}
-;            1       
+;                                 
 			keyOld := SubPat["key"]
 			pressORreleaseOld := SubPat["pressORrelease"]
 			keyHistoryOld := keyHistory
@@ -130,8 +144,8 @@ while(1){
 ;			tooltip, % tip, 350, 10
 ;  
 ;	tooltip,% " `n(line=" A_LineNumber ")`n" keyHistory
-			;msgbox,,% "",% tip,1 ; works :)
-			;msgbox,,% tip,% A_LineNumber,1 ; works :)
+			;msgbox,,% "",% tip,1 ; works :) 
+			;msgbox,,% tip,% A_LineNumber,1 ; works :)  
 
 			
 
@@ -145,13 +159,29 @@ while(1){
 test  sdf sdfs sdf sdf sdf
 test   ssdf    ttets 				tooltip,% " `n(line=" A_LineNumber ")`n" keyHistory
 ssss   sdasd 
+
+ 
+        öl ;      ;      
+
+ 
+
+
+
+
+
+
+
+
+
       
 */
 
 			while(A_Index<200 && RegExMatch(clipboard, regEx)){
 				if(!cbBackup){
-					msgbox,index: %A_Index%<100 break
-					break
+					;msgbox,index: %A_Index%<100 break
+					sleep,5000
+					continue
+					;break
 				}
 				clipboard := cbBackup
 				Sleep,15

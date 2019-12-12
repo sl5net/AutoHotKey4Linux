@@ -2,6 +2,11 @@
 ; https://github.com/sl5net/AutoHotKey4Linux
 ;  dddd ssss <AutoKey:active_title=*/home/seeh/skripts/ahk/read_key_title_class_from_cllipboard_v2.ahk - Mousepad,active_class=mousepad.Mousepad,press_key=Key.ctrl><AutoKey:active_title=*/home/seeh/skripts/ahk/read_key_title_class_from_cllipboard_v2.ahk - Mousepad,active_class=mousepad.Mousepad,press_key=Key.esc>
 
+/*
+input examples:
+; <AutoKey:active_title=....,active_class=....,press_key=Key.ctrl>
+Key.esc key='k' key=Key.ctrl
+*/
 #NoEnv              ; Recommended for performance and compatibility with future AutoHotkey releases.
 #Warn
 #SingleInstance Force

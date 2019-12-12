@@ -5,9 +5,13 @@ using AutoKey, AutoHotKey, wine
 
 You need to install first:
 
-wine for Linux  and 
-AutoHotKey and  
-AutoKey for Linux
+wine for Linux  and
+winetricks maybe
+AutoHotKey (exe) and  
+AutoKey for Linux (its python)
+
+more details here:
+/instalation tipps.md
 
 # Motivation:
 
@@ -41,3 +45,7 @@ information where its coming from (window title, window class)
 # example 191130-222333:
 
 this listens to CTRL+S and reloads: youtu.be / XZkbu4ik83c
+
+# video: 
+
+https : // www . youtube . com / watch ? v = XZkbu4ik83c

@@ -1,4 +1,5 @@
 # this script needs to be started from AutoKey
+# test2222222222222222222
 
 import subprocess
 import threading
@@ -21,10 +22,8 @@ def on_press(key): # Example: <AutoKey:active_title=AutoKey,active_class=autokey
     clipboard.fill_clipboard(str)
     # strLen = len(str)
     # clipboard.fill_clipboard("testsetstt")  # <======= works!!! inside of AutoKey GUIx
-    tOld = active_title 
-    cOld = active_class
     # clipboardBackup = clipboard.get_clipboard()
-    # time.sleep(0.1)
+    # time.sleep(0.1) # its not working
     # time.sleep(0.2)
     # clipboard.fill_clipboard(clipboardBackup)
 
@@ -41,8 +40,6 @@ def on_release(key):
     clipboard.fill_clipboard(str)
     # strLen = len(str)
     # clipboard.fill_clipboard("testsetstt")  # <======= works!!! inside of AutoKey GUIx
-    tOld = active_title 
-    cOld = active_class
 
 
 # Collect events until released tkk j dea
