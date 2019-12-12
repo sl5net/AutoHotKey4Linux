@@ -1,4 +1,5 @@
 # AutoHotKey4Linux version 0.00000001 Alpha
+
 AutoHotKey wrapper, for using AutoHotKey in Linux  
 
 using AutoKey, AutoHotKey, wine
@@ -10,8 +11,7 @@ winetricks maybe
 AutoHotKey (exe) and  
 AutoKey for Linux (its python)
 
-more details here:
-/instalation tipps.md
+more details here: [instalation tipps.md](instalation tipps.md)
 
 # Motivation:
 
