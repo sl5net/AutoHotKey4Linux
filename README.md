@@ -49,3 +49,8 @@ this listens to CTRL+S and reloads: youtu.be / XZkbu4ik83c
 # video: 
 
 https : // www . youtube . com / watch ? v = XZkbu4ik83c
+
+# you might also be interested:
+
+https://sl5net.github.io/Lintalist4Linux/
+
